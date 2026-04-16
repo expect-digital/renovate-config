@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    "security:openssf-scorecard",
+    ":semanticCommits"
+  ],
+  "rebaseWhen": "behind-base-branch",
+  "rangeStrategy": "pin",
+  "automerge": true,
+  "dockerfile": {
+    "managerFilePatterns": ["/Earthfile/"]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update _version ARGs, LETs and ENVs in Earthfile",
+      "managerFilePatterns": ["/^Earthfile$/"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>[a-z-]+?)(?:\\s+depName=(?<depName>.+?))?\\s+packageName=(?<packageName>.+?)(?:\\s+versioning=(?<versioning>[a-z-]+?))?\\s+(?:ENV|ARG|LET)\\s+.+?(_VERSION|_version)=(?<currentValue>.+?)\\s"
+      ]
+    }
+  ]
+}
