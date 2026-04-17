@@ -18,7 +18,8 @@
       "managerFilePatterns": ["/^Earthfile$/"],
       "matchStrings": [
         "(?<prefix>#\\s*renovate:\\s*datasource=(?<datasource>[a-z-]+?)(?:\\s+depName=(?<depName>.+?))?\\s+packageName=(?<packageName>\\S+)(?:\\s+versioning=(?<versioning>[a-z-]+?))?\\s+(?:ENV|ARG|LET)\\s+.+?(_VERSION|_version)=)(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
-      ]
+      ],
+      "autoReplaceStringTemplate": "{{{prefix}}}{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}"
     }
   ]
 }
