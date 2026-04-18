@@ -14,8 +14,9 @@
       "description": "Fix: Update _version ARGs, LETs and ENVs in Earthfile",
       "fileMatch": ["(^|/)Earthfile$"],
       "matchStrings": [
-        "#\\s*renovate:\\s*datasource=(?<datasource>[a-z-]+?)(?:\\s+depName=(?<depName>[^\\s]+))?\\s+packageName=(?<packageName>\\S+)(?:\\s+versioning=(?<versioning>[a-z-]+?))?\\n[ \\t]*(?:ENV|ARG|LET)\\s+[^\\n=]+?(?:_VERSION|_version)=(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
-      ]
+        "(?<comment>#\\s*renovate:\\s*datasource=(?<datasource>[a-z-]+?)(?:\\s+depName=(?<depName>[^\\s]+))?\\s+packageName=(?<packageName>\\S+)(?:\\s+versioning=(?<versioning>[a-z-]+?))?\\n[ \\t]*)(?<directive>ENV|ARG|LET)(?<flags>\\s+(?:--[a-z-]+\\s+)*)(?<varName>[^\\n=]+?(?:_VERSION|_version))=(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
+      ],
+      "autoReplaceStringTemplate": "{{{comment}}}{{{directive}}}{{{flags}}}{{{varName}}}={{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}"
     }
   ]
 }
