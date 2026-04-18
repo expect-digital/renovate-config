@@ -8,9 +8,6 @@
   "rebaseWhen": "behind-base-branch",
   "rangeStrategy": "pin",
   "automerge": true,
-  "dockerfile": {
-    "managerFilePatterns": ["^Earthfile$"]
-  },
   "customManagers": [
     {
       "customType": "regex",
